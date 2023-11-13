@@ -64,6 +64,19 @@ function menu(){
 $tecladoMenu=solicitarNumeroEntre(1, 20);
 return $tecladoMenu;
 }
+function solicitarNombre(){
+    $salida=true;
+    do{
+       echo"ingrese nombre de usuario \n";
+       $nombreUsuario=trim(fgets(STDIN));
+          if(is_numeric($nombreUsuario)){
+             echo"el nombre de usuario no puede ser numerico \n";
+       }else{
+          $salida=false;
+       }
+    }while($salida);
+    return strtolower($nombreUsuario);
+    }
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/

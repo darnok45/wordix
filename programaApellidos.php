@@ -49,10 +49,21 @@ function solicitarNumeroEntre($min, $max)
     }
     return $numero;
 }
-
-/* ****COMPLETAR***** */
-
-
+function menu(){
+    echo"╔════════════════════════════════════════════════════════════════════════════════╗\n";
+    echo"║ seleccione una opcion:                                                         ║\n";
+    echo"║ 1) Jugar al wordix con una palabra elegida.                                    ║\n";
+    echo"║ 2) Jugar al wordix con una palabra aleatoria.                                  ║\n";
+    echo"║ 3) mostrar una partida.                                                        ║\n";
+    echo"║ 4) mostrar la primer partida ganadora.                                         ║\n";
+    echo"║ 5) mostrar resumen de jugador.                                                 ║\n";
+    echo"║ 6) mostrar el listado de partidas ordenadas por jugador y por palabra.         ║\n";
+    echo"║ 7) agregar una palabra de 5 letras a wordix.                                   ║\n";
+    echo"║ 8) salir.                                                                      ║\n";
+    echo"╚════════════════════════════════════════════════════════════════════════════════╝\n";
+$tecladoMenu=solicitarNumeroEntre(1, 20);
+return $tecladoMenu;
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -74,9 +85,8 @@ $partida = jugarWordix("MELON", strtolower("MaJo"));
 
 /*
 do {
-    $opcion = ...;
+    $opcion = menu();
 
-    
     switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1

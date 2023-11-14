@@ -71,8 +71,6 @@ function solicitarNombre(){
 
 
 //Proceso:
-
-$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
@@ -85,6 +83,7 @@ do {
     switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+            $usuario=solicitarNombre();
 
             break;
         case 2: 
@@ -95,12 +94,13 @@ do {
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
             echo "Partida WORDIX".$numerodePartida;
             echo"Palabra".$palabraWOrdix;
-            echo "jugador:".$nombreUsuario;
+            echo "jugador:".$Usuario;
             echo "puntaje:".$puntaje;
             echo "intento:".$nroIntento;
             break;
-        
             //...
-    }
+        }
 } while ($opcion != 8);
 
+
+        $partida = jugarWordix("MELON", strtolower($Usuario));

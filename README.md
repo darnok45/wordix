@@ -12,4 +12,6 @@ Universidad Nacional Del Comahue
 
 -** Genaro Parra**- legajo 4868-mail: parragenaro429@gmail.com- Github: darnok45 "\n"
 -** Villegas Salinas Emmanuel Patricio **- legajo 4925-mail:Emmanuel.villegas@est.fi.uncoma.edu.ar- Github:emmavillegas
+-** Daniela Oñatibia**- legajo 4775-email:danielajuana@gmial.com- Github:danielaOnatibia
+
 

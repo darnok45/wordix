@@ -97,7 +97,7 @@ $partida = jugarWordix("MELON", strtolower("MaJo"));
 
 
 
-/*
+
 do {
     $opcion = menu();
 
@@ -112,10 +112,14 @@ do {
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+            echo "Partida WORDIX".$numerodePartida;
+            echo"Palabra".$palabraWOrdix;
+            echo "jugador:".$nombreUsuario;
+            echo "puntaje:".$puntaje;
+            echo "intento:".$nroIntento;
             break;
         
             //...
     }
-} while ($opcion != X);
-*/
+} while ($opcion != 8);
+

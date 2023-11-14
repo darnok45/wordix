@@ -31,6 +31,25 @@ function cargarColeccionPalabras()
 
     return ($coleccionPalabras);
 }
+
+function solicitarNumeroEntre($min, $max)
+{
+    //int $numero
+
+    $numero = trim(fgets(STDIN));
+
+    if (is_numeric($numero)) { //determina si un string es un número. puede ser float como entero.
+        $numero  = $numero * 1; //con esta operación convierto el string en número.
+    }
+    while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
+        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
+        $numero = trim(fgets(STDIN));
+        if (is_numeric($numero)) {
+            $numero  = $numero * 1;
+        }
+    }
+    return $numero;
+}
 function menu(){
     echo"╔════════════════════════════════════════════════════════════════════════════════╗\n";
     echo"║ seleccione una opcion:                                                         ║\n";
@@ -71,6 +90,8 @@ function solicitarNombre(){
 
 
 //Proceso:
+
+$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
@@ -83,7 +104,6 @@ do {
     switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-            $usuario=solicitarNombre();
 
             break;
         case 2: 
@@ -92,15 +112,10 @@ do {
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-            echo "Partida WORDIX".$numerodePartida;
-            echo"Palabra".$palabraWOrdix;
-            echo "jugador:".$Usuario;
-            echo "puntaje:".$puntaje;
-            echo "intento:".$nroIntento;
+          
             break;
+        
             //...
-        }
+    }
 } while ($opcion != 8);
 
-
-        $partida = jugarWordix("MELON", strtolower($Usuario));

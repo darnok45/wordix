@@ -95,13 +95,15 @@ do {
                 $palabraWordix=trim(fgets(STDIN));
             if($palabraWordix-1 == $palabraAnterior){
                   echo "¡La palabra es igual a la anterior! Ingrese otra palabra.\n";
-            }else{
-                echo "la palabra es: ". $coleccionPalabras[$palabraWordix-1]."\n\n";
-                $palabraAnterior=$palabraWordix-1;
-                $bandera=false;
-            }
-        }while($bandera);
-
+                }else{
+                    $coleccionPalabras[$palabraWordix-1]."\n\n";
+                    $palabraAnterior=$palabraWordix-1;
+                    $bandera=false;
+                }
+            }while($bandera);
+            
+            $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
+            echo "\n";
             break;
         case 2: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
@@ -124,7 +126,8 @@ do {
 
             } while (!$bandera2);
 
-
+            $partida = jugarWordix($coleccionPalabras[$numeroAleatorio-1], strtolower($nombreUsuario));
+            echo "\n";
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
@@ -134,6 +137,5 @@ do {
             //...
     }
 } while ($opcion != 8);
-$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);

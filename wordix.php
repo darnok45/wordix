@@ -27,7 +27,10 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
+ * esta funcion retorna un numero entero entre los parametros de entrada $min y $max
+ * @param int $min
+ * @param int $max
+ * @return int $numero
  */
 function solicitarNumeroEntre($min, $max)
 {
@@ -120,7 +123,8 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * esta funcion imprime un saludo de bienvenida al juego con el nombre del usuario
+ * @param string $usuario
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -133,7 +137,9 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * esta funcion retorna true solo si la palabra ingresada por parametro tiene caracteres alfabeticos
+ * @param string $cadena
+ * @return boolean $esLetra
  */
 function esPalabra($cadena)
 {
@@ -142,14 +148,15 @@ function esPalabra($cadena)
     $esLetra = true;
     $i = 0;
     while ($esLetra && $i < $cantCaracteres) {
-        $esLetra =  ctype_alpha($cadena[$i]);
+        $esLetra =  ctype_alpha($cadena[$i]); 
         $i++;
     }
     return $esLetra;
 }
 
 /**
- *  ****COMPLETAR*****
+ * esta funcion se asegura que la palabra ingresada sea de 5 letras y retorna esta misma en MAYUSCULAS
+ * @return string $palabra
  */
 function leerPalabra5Letras()
 {

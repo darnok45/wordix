@@ -87,15 +87,17 @@ function solicitarNombre(){
 
 
 //Inicialización de variables:
-
-
+$coleccionPalabras = [
+    "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
+    "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
+    "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
+    "MOUSE", "PASTO", "JEANS", "TUMBA", "PLANO"
+];
 //Proceso:
 
 $partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
-
-
 
 
 do {
@@ -104,6 +106,10 @@ do {
     switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+            $nombreUsuario=solicitarNombre();
+            echo "ingrese el numero de la palabra: \n";
+            $palabraWordix=trim(fgets(STDIN));
+            echo "la palabra es: ". $coleccionPalabras[$palabraWordix-1]."\n\n";
 
             break;
         case 2: 
@@ -118,4 +124,3 @@ do {
             //...
     }
 } while ($opcion != 8);
-

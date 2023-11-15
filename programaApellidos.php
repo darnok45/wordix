@@ -108,17 +108,17 @@ do {
             $nombreUsuario = solicitarNombre();
             $bandera2 = false;
 
-            $numeroAleatorio = rand(0,count($coleccionPalabras)); // Genera un número aleatorio entre 1 y 10
+            $numeroAleatorio = rand(1,count($coleccionPalabras)-2); // Genera un número aleatorio entre 1 y 10
 
             do {
                 echo"se te ha asignado aleatorio la palabra numero:".$numeroAleatorio ."\n";
 
-                if($numeroAleatorio == $palabraAnterior){
+                if($numeroAleatorio-1 == $palabraAnterior){
                     echo"¡La palabra es igual a la anterior! se te asignara otra palabra aleatoria.\n ";
-                    $numeroAleatorio = rand(0,count($coleccionPalabras));
+                    $numeroAleatorio = rand(1,count($coleccionPalabras));
                 } else {
-                    echo"la palabra es:".$coleccionPalabras[$numeroAleatorio]."\n\n";
-                    $palabraAnterior =  $numeroAleatorio;
+                    echo"la palabra es:".$coleccionPalabras[$numeroAleatorio-1]."\n\n";
+                    $palabraAnterior =  $numeroAleatorio-1;
                     $bandera2= true;
                 }
 

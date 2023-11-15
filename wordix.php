@@ -27,10 +27,7 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- * esta funcion retorna un numero entero entre los parametros de entrada $min y $max
- * @param int $min
- * @param int $max
- * @return int $numero
+ *  ****COMPLETAR*****
  */
 function solicitarNumeroEntre($min, $max)
 {

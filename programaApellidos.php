@@ -31,25 +31,6 @@ function cargarColeccionPalabras()
 
     return ($coleccionPalabras);
 }
-
-function solicitarNumeroEntre($min, $max)
-{
-    //int $numero
-
-    $numero = trim(fgets(STDIN));
-
-    if (is_numeric($numero)) { //determina si un string es un número. puede ser float como entero.
-        $numero  = $numero * 1; //con esta operación convierto el string en número.
-    }
-    while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
-        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
-        $numero = trim(fgets(STDIN));
-        if (is_numeric($numero)) {
-            $numero  = $numero * 1;
-        }
-    }
-    return $numero;
-}
 function menu(){
     echo"╔════════════════════════════════════════════════════════════════════════════════╗\n";
     echo"║ seleccione una opcion:                                                         ║\n";
@@ -93,6 +74,7 @@ $coleccionPalabras = [
     "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
     "MOUSE", "PASTO", "JEANS", "TUMBA", "PLANO"
 ];
+$palabraAnterior=0;
 //Proceso:
 
 $partida = jugarWordix("MELON", strtolower("MaJo"));
@@ -107,9 +89,18 @@ do {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
             $nombreUsuario=solicitarNombre();
-            echo "ingrese el numero de la palabra: \n";
-            $palabraWordix=trim(fgets(STDIN));
-            echo "la palabra es: ". $coleccionPalabras[$palabraWordix-1]."\n\n";
+            $bandera=true;
+            do{
+                echo "ingrese el numero de la palabra: \n";
+                $palabraWordix=trim(fgets(STDIN));
+            if($palabraAnterior-1 == $palabraAnterior){
+                  echo "¡La palabra es igual a la anterior! Ingrese otra palabra.\n";
+            }else{
+                echo "la palabra es: ". $coleccionPalabras[$palabraWordix-1]."\n\n";
+                $palabraAnterior=$palabraWordix-1;
+                $bandera=false;
+            }
+        }while($bandera);
 
             break;
         case 2: 

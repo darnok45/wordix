@@ -93,7 +93,7 @@ do {
             do{
                 echo "ingrese el numero de la palabra: \n";
                 $palabraWordix=trim(fgets(STDIN));
-            if($palabraAnterior-1 == $palabraAnterior){
+            if($palabraWordix-1 == $palabraAnterior){
                   echo "¡La palabra es igual a la anterior! Ingrese otra palabra.\n";
             }else{
                 echo "la palabra es: ". $coleccionPalabras[$palabraWordix-1]."\n\n";

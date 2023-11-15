@@ -68,6 +68,7 @@ function solicitarNombre(){
 
 
 //Inicialización de variables:
+$resultadoPalabra=0;
 //Varibles case1
 $coleccionPalabras = [
     "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
@@ -88,6 +89,7 @@ do {
     switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+            
             $nombreUsuario=solicitarNombre();
             $bandera=true;
             do{
@@ -104,6 +106,9 @@ do {
             
             $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
             echo "\n";
+            $count=$count+1;
+            $resultadoPalabra = $coleccionPalabras[$palabraWordix-1];
+            
             break;
         case 2: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
@@ -128,10 +133,16 @@ do {
 
             $partida = jugarWordix($coleccionPalabras[$numeroAleatorio-1], strtolower($nombreUsuario));
             echo "\n";
+            $resultadoPalabra = $coleccionPalabras[$numeroAleatorio-1];
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-          
+            $partida = [
+                $resultadoPalabra => $palabraWordix,
+                $nombreUsuario => $nombreUsuario,
+                "intentos" => $nroIntento,
+                "puntaje" => $puntaje
+            ];
             break;
         
             //...

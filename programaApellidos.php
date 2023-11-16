@@ -144,8 +144,33 @@ do {
                 "puntaje" => $puntaje
             ];
             break;
-        
-            //...
+        case 4:
+            //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4
+
+            break;
+
+        case 7:
+
+            
+            // Solicitar una palabra de 5 letras al usuario
+            do {
+                $nuevaPalabra = strtoupper(readline("Ingrese una palabra de 5 letras para agregar a Wordix: "));
+            } while (strlen($nuevaPalabra) !== 5 || !ctype_alpha($nuevaPalabra));
+
+            // Agregar la nueva palabra a la colección de palabras Wordix
+            $coleccionPalabras[] = $nuevaPalabra;
+
+            // Mostrar un mensaje indicando que la palabra ha sido agregada
+            echo "La palabra '$nuevaPalabra' ha sido agregada a Wordix.\n";
+
+            // Puedes imprimir las palabras actuales en Wordix si lo deseas
+            echo "Palabras en Wordix: " . implode(", ", $coleccionPalabras) . "\n";
+            break;
+
+        case 8:
+            echo "saliendo del wordix, los esperamos la proxima";
+
+            break;
     }
 } while ($opcion != 8);
 //print_r($partida);

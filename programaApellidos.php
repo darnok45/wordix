@@ -59,7 +59,6 @@ function solicitarNombre(){
     }while($salida);
     return strtolower($nombreUsuario);
     }
-
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -69,6 +68,7 @@ function solicitarNombre(){
 
 //Inicialización de variables:
 $resultadoPalabra=0;
+$count=0;
 //Varibles case1
 $coleccionPalabras = [
     "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
@@ -115,34 +115,28 @@ do {
             $nombreUsuario = solicitarNombre();
             $bandera2 = false;
 
-            $numeroAleatorio = rand(1,count($coleccionPalabras)-2); // Genera un número aleatorio entre 1 y 10
+            $palabraWordix = rand(1,count($coleccionPalabras)); // Genera un número aleatorio entre 1 y 10
 
             do {
-                echo"se te ha asignado aleatorio la palabra numero:".$numeroAleatorio ."\n";
+                echo"se te ha asignado aleatorio la palabra numero:".$palabraWordix ."\n";
 
-                if($numeroAleatorio-1 == $palabraAnterior){
+                if($palabraWordix-1 == $palabraAnterior){
                     echo"¡La palabra es igual a la anterior! se te asignara otra palabra aleatoria.\n ";
-                    $numeroAleatorio = rand(1,count($coleccionPalabras));
+                    $palabraWordix = rand(1,count($coleccionPalabras));
                 } else {
-                    echo"la palabra es:".$coleccionPalabras[$numeroAleatorio-1]."\n\n";
-                    $palabraAnterior =  $numeroAleatorio-1;
+                    echo"la palabra es:".$coleccionPalabras[$palabraWordix-1]."\n\n";
+                    $palabraAnterior =  $palabraWordix-1;
                     $bandera2= true;
                 }
 
             } while (!$bandera2);
 
-            $partida = jugarWordix($coleccionPalabras[$numeroAleatorio-1], strtolower($nombreUsuario));
+            $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
             echo "\n";
-            $resultadoPalabra = $coleccionPalabras[$numeroAleatorio-1];
+            $resultadoPalabra = $coleccionPalabras[$palabraWordix-1];
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-            $partida = [
-                $resultadoPalabra => $palabraWordix,
-                $nombreUsuario => $nombreUsuario,
-                "intentos" => $nroIntento,
-                "puntaje" => $puntaje
-            ];
             break;
         case 4:
             //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4

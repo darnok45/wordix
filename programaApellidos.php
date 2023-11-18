@@ -59,6 +59,26 @@ function solicitarNombre(){
     }while($salida);
     return strtolower($nombreUsuario);
     }
+function mostrarPartida($partida, $nroPartida){
+    
+    $palabra = $partida["palabraWordix"];
+    $nombreJugador = $partida["jugador"];
+    $intentos = $partida["intentos"];
+    $puntaje = $partida["puntaje"];
+    
+    
+    if ($intentos > 0) {
+    $resultadoIntento = "Adivinó la palabra en $intentos intentos.";
+    } else {
+        $resultadoIntento = "No adivinó la palabra";
+    }
+    
+    echo "Partida WORDIX". $nroPartida.": palabra". $palabra."\n";
+    echo "Jugador:". $nombreJugador."\n";
+    echo "Puntaje:". $puntaje."puntos\n";
+    echo "Intento:". $resultadoIntento. "\n";
+
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -67,8 +87,8 @@ function solicitarNombre(){
 
 
 //Inicialización de variables:
-$resultadoPalabra=0;
-$count=0;
+$resultadoPalabra = 0;
+$nroPartida = 0;
 //Varibles case1
 $coleccionPalabras = [
     "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
@@ -78,6 +98,7 @@ $coleccionPalabras = [
 ];
 $palabraAnterior=0;
 //variables case2
+//variables case 3
 //Proceso:
 
 
@@ -106,9 +127,7 @@ do {
             
             $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
             echo "\n";
-            $count=$count+1;
-            $resultadoPalabra = $coleccionPalabras[$palabraWordix-1];
-            
+            $nroPartida = $nroPartida + 1;
             break;
         case 2: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
@@ -133,10 +152,14 @@ do {
 
             $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
             echo "\n";
-            $resultadoPalabra = $coleccionPalabras[$palabraWordix-1];
+            $nroPartida = $nroPartida + 1;
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            echo "Ingrese el número de partida: ";
+            $nroPartida = trim(fgets(STDIN));
+            
+            mostrarPartida($partida,$nroPartida);
             break;
         case 4:
             //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4

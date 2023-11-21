@@ -79,6 +79,24 @@ function mostrarPartida($partida, $nroPartida){
     echo "Intento:". $resultadoIntento. "\n";
 
 }
+function mostrarPartidaGanadora($nombreUsuario, $partida){
+$partidas=[];
+$partidas[] = $partida;
+    foreach ($partidas as $partida){
+        if ($partida["jugador"] == $nombreUsuario) {
+            if ($partida["intentos"] == 0) {
+                echo "La primera partida no fue ganadora.\n";
+                return;
+            } else {
+                echo "La primera partida ganadora fue encontrada:\n";
+                echo "Jugador: " . $partida["jugador"] . "\n";
+                echo "puntaje: " .$partida["puntaje"] . "\n";
+                echo "intento: " .$partida["intentos"] . "\n";
+                return; 
+            }
+        }
+    }
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -99,10 +117,9 @@ $coleccionPalabras = [
 $palabraAnterior=0;
 //variables case2
 //variables case 3
+//variables case 4
+
 //Proceso:
-
-
-
 
 do {
     $opcion = menu();
@@ -163,16 +180,20 @@ do {
             break;
         case 4:
             //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4
-
+            $nombreUsuario = solicitarNombre();
+            mostrarPartidaGanadora($nombreUsuario, $partida);
             break;
+        case 5:
+             //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4
+        case 6:
+            //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4       
 
         case 7:
-
-            
             // Solicitar una palabra de 5 letras al usuario
             do {
                 $nuevaPalabra = strtoupper(readline("Ingrese una palabra de 5 letras para agregar a Wordix: "));
             } while (strlen($nuevaPalabra) !== 5 || !ctype_alpha($nuevaPalabra));
+            //hace lo mismo que la funcin de pedir palabra de 5 letras
 
             // Agregar la nueva palabra a la colección de palabras Wordix
             $coleccionPalabras[] = $nuevaPalabra;
@@ -182,6 +203,7 @@ do {
 
             // Puedes imprimir las palabras actuales en Wordix si lo deseas
             echo "Palabras en Wordix: " . implode(", ", $coleccionPalabras) . "\n";
+            //hace lo mismo que un array_push
             break;
 
         case 8:

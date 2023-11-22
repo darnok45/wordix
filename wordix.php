@@ -334,32 +334,38 @@ function esIntentoGanado($estructuraPalabraIntento)
     return $ganado;
 }
 
+
+
 /**
- * ****COMPLETAR***** documentación de la intefaz
+ * esta funcion retorna el puntaje de la palabra adivinada
+ * @param string $palabraWordix
+ * @param int $cantDeIntentos
+ * @return int $puntaje 
  */
-function obtenerPuntajeWordix($palabraWordix, $nroIntento){
-    if ($nroIntento <= 6) {
-        $puntajeBase = 7 - $nroIntento;
-    } else {
-        $puntajeBase = 0;
-    }    
-        $puntajeLetras = 0;
-        $vocales = ['A', 'E', 'I', 'O', 'U'];
-        $consonantesAnterioresM = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
+function obtenerPuntajeWordix($palabraWordix, $cantDeIntentos){
+    // Declaracion de variales internas de la funcion 
+    //arreglo asociativo $puntajeDeLetras
+    // int $puntaje 
     
-        foreach (str_split($palabraWordix) as $letra) {
-            if (in_array($letra, $vocales)) {
-                $puntajeLetras = $puntajeLetras + 1;
-            } elseif (in_array($letra, $consonantesAnterioresM)) {
-                $puntajeLetras = $puntajeLetras + 2;
-            } else {
-                $puntajeLetras = $puntajeLetras+ 3;
-            }
+    $puntajeDeLetras = [ "A" => 1,  "E" => 1, "I" => 1,  "O" => 1, "U" => 1, "B"=> 2, "C"=> 2,
+    "D"=> 2, "F"=> 2,  "G"=> 2, "H"=> 2, "J"=> 2, "K"=> 2, "L"=> 2,  "M"=> 2,  "N"=> 3,  "P"=> 3,
+     "Q"=> 3, "R"=> 3,  "S"=> 3,  "T"=> 3, "V"=> 3,  "W"=> 3,  "X"=> 3,  "Y"=> 3,  "Z"=> 3 ]; 
+    $puntaje=0;
+    
+     if ($cantDeIntentos>0 ){
+        for ($i=0; $i< 5; $i++) {
+         
+             $v = $puntajeDeLetras[$palabraWordix[$i] ];
+             $puntaje = $puntaje + $v;
         }
-        $puntajeTotal = $puntajeBase + $puntajeLetras;
-    
-        return $puntajeTotal;
-    }
+        $puntaje = $puntaje + (7-$cantDeIntentos);
+     }
+     return $puntaje;
+     }
+
+
+
+     
 /**
  * Dada una palabra para adivinar, juega una partida de wordix intentando que el usuario adivine la palabra.
  * @param string $palabraWordix

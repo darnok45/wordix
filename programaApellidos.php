@@ -97,6 +97,52 @@ $partidas[] = $partida;
         }
     }
 }
+function agregarLetra($nuevaPalabra,$coleccionPalabras){
+    echo "La palabra '$nuevaPalabra' ha sido agregada a Wordix.\n";
+
+    echo "Palabras en Wordix: " . array_push($coleccionPalabras,$nuevaPalabra) . "\n";
+    var_dump($coleccionPalabras);
+
+}
+function numeroAleatorio($coleccionPalabras,$palabraAnterior,$nroPartida,$nombreUsuario){
+    $bandera2 = false;
+            $palabraWordix = rand(1,count($coleccionPalabras)); // Genera un número aleatorio entre 1 y 10
+
+            do {
+                echo"se te ha asignado aleatorio la palabra numero:".$palabraWordix ."\n";
+
+                if($palabraWordix-1 == $palabraAnterior){
+                    echo"¡La palabra es igual a la anterior! se te asignara otra palabra aleatoria.\n ";
+                    $palabraWordix = rand(1,count($coleccionPalabras));
+                } else {
+                    echo"la palabra es:".$coleccionPalabras[$palabraWordix-1]."\n\n";
+                    $palabraAnterior =  $palabraWordix-1;
+                    $bandera2= true;
+                }
+                $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
+            echo "\n";
+            $nroPartida = $nroPartida + 1;
+    } while (!$bandera2);
+
+}
+function seleccionarPalabra($coleccionPalabras,$palabraAnterior,$nombreUsuario,$nroPartida){
+    $bandera=true;
+    do{
+        echo "ingrese el numero de la palabra: \n";
+        $palabraWordix=trim(fgets(STDIN));
+    if($palabraWordix-1 == $palabraAnterior){
+          echo "¡La palabra es igual a la anterior! Ingrese otra palabra.\n";
+        }else{
+            $coleccionPalabras[$palabraWordix-1]."\n\n";
+            $palabraAnterior=$palabraWordix-1;
+            $bandera=false;
+        }
+    }while($bandera);
+    
+    $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
+    echo "\n";
+    $nroPartida = $nroPartida + 1;
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -129,47 +175,12 @@ do {
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
             
             $nombreUsuario=solicitarNombre();
-            $bandera=true;
-            do{
-                echo "ingrese el numero de la palabra: \n";
-                $palabraWordix=trim(fgets(STDIN));
-            if($palabraWordix-1 == $palabraAnterior){
-                  echo "¡La palabra es igual a la anterior! Ingrese otra palabra.\n";
-                }else{
-                    $coleccionPalabras[$palabraWordix-1]."\n\n";
-                    $palabraAnterior=$palabraWordix-1;
-                    $bandera=false;
-                }
-            }while($bandera);
-            
-            $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
-            echo "\n";
-            $nroPartida = $nroPartida + 1;
+           seleccionarPalabra($coleccionPalabras,$palabraAnterior,$nombreUsuario,$nroPartida);
             break;
         case 2: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
             $nombreUsuario = solicitarNombre();
-            $bandera2 = false;
-
-            $palabraWordix = rand(1,count($coleccionPalabras)); // Genera un número aleatorio entre 1 y 10
-
-            do {
-                echo"se te ha asignado aleatorio la palabra numero:".$palabraWordix ."\n";
-
-                if($palabraWordix-1 == $palabraAnterior){
-                    echo"¡La palabra es igual a la anterior! se te asignara otra palabra aleatoria.\n ";
-                    $palabraWordix = rand(1,count($coleccionPalabras));
-                } else {
-                    echo"la palabra es:".$coleccionPalabras[$palabraWordix-1]."\n\n";
-                    $palabraAnterior =  $palabraWordix-1;
-                    $bandera2= true;
-                }
-
-            } while (!$bandera2);
-
-            $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
-            echo "\n";
-            $nroPartida = $nroPartida + 1;
+            numeroAleatorio($coleccionPalabras,$palabraAnterior,$nroPartida,$nombreUsuario);
             break;
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
@@ -190,20 +201,10 @@ do {
 
         case 7:
             // Solicitar una palabra de 5 letras al usuario
-            do {
-                $nuevaPalabra = strtoupper(readline("Ingrese una palabra de 5 letras para agregar a Wordix: "));
-            } while (strlen($nuevaPalabra) !== 5 || !ctype_alpha($nuevaPalabra));
-            //hace lo mismo que la funcin de pedir palabra de 5 letras
+            
+            $nuevaPalabra = leerPalabra5Letras();
 
-            // Agregar la nueva palabra a la colección de palabras Wordix
-            $coleccionPalabras[] = $nuevaPalabra;
-
-            // Mostrar un mensaje indicando que la palabra ha sido agregada
-            echo "La palabra '$nuevaPalabra' ha sido agregada a Wordix.\n";
-
-            // Puedes imprimir las palabras actuales en Wordix si lo deseas
-            echo "Palabras en Wordix: " . implode(", ", $coleccionPalabras) . "\n";
-            //hace lo mismo que un array_push
+            agregarLetra($nuevaPalabra,$coleccionPalabras);
             break;
 
         case 8:

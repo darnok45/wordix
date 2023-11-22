@@ -270,8 +270,17 @@ do {
             echo "Ingrese el número de partida: ";
             $nroPartida = trim(fgets(STDIN));
             
-            $nombreDeJugador = solicitarNombre ();
-            $resumenPartidas = generarResumenJugador ($coleccionPartidas, $nombreDeJugador);
+            mostrarPartida($partida,$nroPartida);
+            break;
+        case 4:
+            //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4
+            $nombreUsuario = solicitarNombre();
+            mostrarPartidaGanadora($nombreUsuario, $partida);
+            break;
+        case 5:
+            $nombreDeJugador = solicitarNombre();
+
+            $resumenPartidas = generarResumenJugador ($coleccionPartidas, $nombreDelJugador);
 
 
 

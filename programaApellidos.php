@@ -39,6 +39,7 @@ function cargarColeccionPartidas(){
     ["palabraWordix" => "PIANO", "jugador" => "milo", "intento" => 2 , "puntaje" => 9],
     ["palabraWordix" => "PISOS", "jugador" => "pipi", "intento" => 3 , "puntaje" => 7],
     ["palabraWordix" => "PASTO", "jugador" => "roro", "intento" => 4 , "puntaje" => 11] ];
+
     return ($coleccionPartidas);
 }
 
@@ -183,45 +184,44 @@ function generarResumenJugador ($coleccionPartidas, $nombreDeJugador){
     
     foreach ($coleccionPartidas as $partida)
     {
-        if ($nombreDeJugador == $partida["jugador"]){
+        if ($nombreDeJugador ==  $partida["jugador"]){
     
         $resumenJugador["numTotalPartidas"] =   $resumenJugador["numTotalPartidas"] + 1;
     
-        $resumenJugador ["totalPuntajes"] =   $resumenJugador ["totalPuntajes"] + $partida ["puntaje"];
+        $resumenJugador ["totalPuntajes"] =   $resumenJugador ["totalPuntajes"] +  $partida["puntaje"];
         
     
     
-         if ($partida ["intento"] > 0  ) {
+         if ( $partida["intento"] > 0  ) {
         $resumenJugador ["victorias"] = $resumenJugador ["victorias"] + 1;
          }
     
-         if ($partida ["intento"] == 1 ){
+         if ($partida["intento"] == 1 ){
          $resumenJugador ["intento1"] = $resumenJugador ["intento1"] + 1;
          }
     
-         if ($partida ["intento"] == 2 ){
+         if ($partida["intento"] == 2 ){
          $resumenJugador ["intento2"] = $resumenJugador ["intento2"] + 1;
          }
     
-         if ($partida ["intento"] == 3 ){
+         if ($partida["intento"] == 3 ){
          $resumenJugador ["intento3"] = $resumenJugador ["intento3"] + 1;
          }
     
-         if ($partida ["intento"] == 4 ){
+         if ($partida["intento"] == 4 ){
          $resumenJugador ["intento4"] = $resumenJugador ["intento4"] + 1;
          }
     
-         if ($partida ["intento"] == 5 ){
+         if ($partida["intento"] == 5 ){
          $resumenJugador ["intento5"] = $resumenJugador ["intento5"] + 1;
          }
     
-         if ($partida ["intento"] == 6 ){
+         if ($partida["intento"] == 6 ){
          $resumenJugador ["intento6"] = $resumenJugador ["intento6"] + 1;
          } 
          $resumenJugador ["porcentajeVictorias" ] = $resumenJugador ["victorias"] * 100 /  $resumenJugador["numTotalPartidas"];
-    
-        }
         
+        }   
     }
     return $resumenJugador;
 }     
@@ -309,7 +309,7 @@ do {
             $nombreDeJugador = solicitarNombre();
 
             $resumenPartidas = generarResumenJugador ($coleccionPartidas, $nombreDeJugador,);
-            echo $resumenPartidas;
+            print_r($resumenPartidas);
 
             break;
         case 6:

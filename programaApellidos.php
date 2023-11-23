@@ -225,13 +225,21 @@ function generarResumenJugador ($coleccionPartidas, $nombreDeJugador){
     }
     return $resumenJugador;
 }     
-
-
-
-
-
-
-
+function comparacion($a, $b){
+    if($a["jugador"] == $b["jugador"]){
+        if($a["palabraWordix"] == $b["palabraWordix"]){
+            return 0;
+        }
+        if($a["palabraWordix"] < $b["palabraWordix"]){
+        return -1;
+        }else
+        return 1;
+    }
+    if($a["jugador"] < $b["jugador"]){
+    return -1;
+    }else 
+    return 1;
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -313,7 +321,13 @@ do {
 
             break;
         case 6:
-            //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4       
+            $partidasOrdenadas = cargarColeccionPartidas();
+            if ($partidasOrdenadas == 0){
+                echo "no hay partidas.";
+            }else{
+                uasort($partidasOrdenadas,'comparacion');
+                print_r($partidasOrdenadas);
+            }
             break;
         case 7:
             // Solicitar una palabra de 5 letras al usuario

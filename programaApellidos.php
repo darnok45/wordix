@@ -39,7 +39,7 @@ function cargarColeccionPartidas(){
     ["palabraWordix" => "PIANO", "jugador" => "milo", "intento" => 2 , "puntaje" => 9],
     ["palabraWordix" => "PISOS", "jugador" => "pipi", "intento" => 3 , "puntaje" => 7],
     ["palabraWordix" => "PASTO", "jugador" => "roro", "intento" => 4 , "puntaje" => 11] ];
-    return $coleccionPartidas;
+    return ($coleccionPartidas);
 }
 
 
@@ -172,55 +172,60 @@ function generarResumenJugador ($coleccionPartidas, $nombreDeJugador){
 
     
     $resumenJugador = [
-        "jugador" => $nombreDeJugador, "numTotalPartidas" => 0,  "totalPuntajes" => 0, "victorias" => 0, 
+        "jugador" => $nombreDeJugador, 
+        "numTotalPartidas" => 0,  
+        "totalPuntajes" => 0, 
+        "victorias" => 0, 
         "porcentajeVictorias" => 0,
         "intento1" => 0, "intento2" => 0, "intento3" => 0, "intento4" => 0, 
-        "intento5" => 0, "intento6" => 0, ];
+        "intento5" => 0, "intento6" => 0, 
+    ];
     
-    foreach ($coleccionPartidas as $partidas)
+    foreach ($coleccionPartidas as $partida)
     {
-        if ($nombreDeJugador == $partidas["jugador"]){
+        if ($nombreDeJugador == $partida["jugador"]){
     
         $resumenJugador["numTotalPartidas"] =   $resumenJugador["numTotalPartidas"] + 1;
     
-        $resumenJugador ["totalPuntajes"] =   $resumenJugador ["totalPuntajes"] + $partidas ["puntaje"];
+        $resumenJugador ["totalPuntajes"] =   $resumenJugador ["totalPuntajes"] + $partida ["puntaje"];
         
     
     
-         if ($partidas ["intento"] > 0  ) {
+         if ($partida ["intento"] > 0  ) {
         $resumenJugador ["victorias"] = $resumenJugador ["victorias"] + 1;
          }
     
-         if ($partidas ["intento"] == 1 ){
+         if ($partida ["intento"] == 1 ){
          $resumenJugador ["intento1"] = $resumenJugador ["intento1"] + 1;
          }
     
-         if ($partidas ["intento"] == 2 ){
+         if ($partida ["intento"] == 2 ){
          $resumenJugador ["intento2"] = $resumenJugador ["intento2"] + 1;
          }
     
-         if ($partidas ["intento"] == 3 ){
+         if ($partida ["intento"] == 3 ){
          $resumenJugador ["intento3"] = $resumenJugador ["intento3"] + 1;
          }
     
-         if ($partidas ["intento"] == 4 ){
+         if ($partida ["intento"] == 4 ){
          $resumenJugador ["intento4"] = $resumenJugador ["intento4"] + 1;
          }
     
-         if ($partidas ["intento"] == 5 ){
+         if ($partida ["intento"] == 5 ){
          $resumenJugador ["intento5"] = $resumenJugador ["intento5"] + 1;
          }
     
-         if ($partidas ["intento"] == 6 ){
+         if ($partida ["intento"] == 6 ){
          $resumenJugador ["intento6"] = $resumenJugador ["intento6"] + 1;
          } 
          $resumenJugador ["porcentajeVictorias" ] = $resumenJugador ["victorias"] * 100 /  $resumenJugador["numTotalPartidas"];
     
         }
-    
+        
     }
+    return $resumenJugador;
 }     
-return $resumenJugador;
+
 
 
 
@@ -244,11 +249,33 @@ $coleccionPalabras = [
     "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
     "MOUSE", "PASTO", "JEANS", "TUMBA", "PLANO"
 ];
+
+
 $palabraAnterior=0;
-//variables case2
+//variables case 2
 //variables case 3
 //variables case 4
-
+//variables case 5 
+$coleccionPartidas = [
+    ["palabraWordix" => "QUESO", "jugador" => "miguel", "intento" => 0, "puntaje" => 0],
+    ["palabraWordix" => "FUEGO", "jugador" => "miguel", "intento" => 2, "puntaje" => 13],
+    ["palabraWordix" => "MUJER", "jugador" => "miguel", "intento" => 3, "puntaje" => 8],
+    ["palabraWordix" => "CASAS", "jugador" => "miguel", "intento" => 4, "puntaje" => 7],
+    ["palabraWordix" => "RASGO", "jugador" => "pinqui", "intento" => 5, "puntaje" => 7],
+    ["palabraWordix" => "GATOS", "jugador" => "pinqui", "intento" => 0, "puntaje" => 0],
+    ["palabraWordix" => "GOTAS", "jugador" => "feli", "intento" => 1 , "puntaje" => 9],
+    ["palabraWordix" => "HUEVO", "jugador" => "feli", "intento" => 2 , "puntaje" => 18],
+    ["palabraWordix" => "TINTO", "jugador" => "feli", "intento" => 0 , "puntaje" => 0],
+    ["palabraWordix" => "NAVES", "jugador" => "leo", "intento" => 0 , "puntaje" => 0 ],
+    ["palabraWordix" => "VERDE", "jugador" => "leo", "intento" => 0 , "puntaje" => 0],
+    ["palabraWordix" => "MELON", "jugador" => "leo", "intento" => 6 , "puntaje" => 5],
+    ["palabraWordix" => "YUYOS", "jugador" => "milo", "intento" => 1 , "puntaje" => 13],
+    ["palabraWordix" => "PIANO", "jugador" => "milo", "intento" => 2 , "puntaje" => 9],
+    ["palabraWordix" => "PISOS", "jugador" => "pipi", "intento" => 3 , "puntaje" => 7],
+    ["palabraWordix" => "PASTO", "jugador" => "roro", "intento" => 4 , "puntaje" => 11] 
+];
+//variables case 6
+//variables case 7 
 //Proceso:
 
 do {
@@ -281,14 +308,13 @@ do {
         case 5:
             $nombreDeJugador = solicitarNombre();
 
-            $resumenPartidas = generarResumenJugador ($coleccionPartidas, $nombreDelJugador);
+            $resumenPartidas = generarResumenJugador ($coleccionPartidas, $nombreDeJugador,);
+            echo $resumenPartidas;
 
-
-
-             //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4
+            break;
         case 6:
             //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4       
-
+            break;
         case 7:
             // Solicitar una palabra de 5 letras al usuario
             

@@ -81,6 +81,8 @@ return $tecladoMenu;
 }
 /**
  * pedimos un nombre de usuario que no inicie en numeros
+ * @param string $nombreUsuario
+ * @param boolean $salida
  * @return string
  */
 function solicitarNombre(){
@@ -88,8 +90,10 @@ function solicitarNombre(){
     do{
         echo"ingrese nombre de usuario \n";
         $nombreUsuario=trim(fgets(STDIN));
-        if(is_numeric($nombreUsuario)){
-            echo"el nombre de usuario no puede ser numerico \n";
+        if(empty($nombreUsuario)){
+            echo"el nombre de usuario no puede ser vacio."."\n";
+        }elseif(is_numeric($nombreUsuario[0])){
+            echo"el nombre de usuario no puede ser numerico."."\n";
         }else{
             $salida=false;
         }
@@ -100,9 +104,11 @@ function solicitarNombre(){
 /**********FUNCIONES CASE 1************/
 /**************************************/
 /**
- * solicitamos el numero de palabra si igual a la anterior debe ingresar una distinta
- * @param int $palabraAnterior
+ * La palabra ya fue utilizada elegia otra
+ * @param array $coleccionPalabras
  * @param boolean $bandera 
+ * @param array $coleccionPartidas
+ * @param string $nombreUsuario
  */
 function seleccionarPalabra($coleccionPalabras, $coleccionPartidas, $nombreUsuario){
     do{
@@ -176,7 +182,7 @@ function mostrarPartida($coleccionPartidas, $nroPartida){
  * mostramos la primera partida ganadora segun el nombre de usuario solicitado
  * @param array $partida
  * @param string $nombreUsuario
-
+ * @param boolean $bandera3
  */
 function mostrarPartidaGanadora($nombreUsuario,$coleccionPartidas){
 $bandera3 = false;

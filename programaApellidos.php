@@ -104,21 +104,21 @@ function solicitarNombre(){
  * @param int $palabraAnterior
  * @param boolean $bandera 
  */
-function seleccionarPalabra($palabraAnterior, $coleccionPalabras){
-    //1 recorrer $coleccionPartidas buscando $palabra y el usuario
-    //2 $palabraAnterior se comparar con el usuario
-    $bandera=true;
+function seleccionarPalabra($coleccionPalabras, $coleccionPartidas, $nombreUsuario){
     do{
-        echo "ingrese el numero de la palabra: \n";
+        echo "ingrese el numero de la palabra: "."\n";
         $palabraWordix = solicitarNumeroEntre(1, count($coleccionPalabras));
         $palabraWordix = $palabraWordix - 1;
-    if($palabraWordix == $palabraAnterior){
-          echo "¡La palabra es igual a la anterior! Ingrese otra palabra.\n";
-        }else{
-            $bandera=false;
+
+        $bandera = false;
+        for ($i = 0; $i < count($coleccionPartidas); $i++) {
+            if ($coleccionPartidas[$i]["jugador"] == $nombreUsuario && $coleccionPartidas[$i]["palabraWordix"] == $coleccionPalabras[$palabraWordix]) {
+            echo "¡La palabra es igual a la anterior! Ingrese otra palabra.\n";
+            $bandera = true;
+            }
         }
     }while($bandera);
-return $palabraWordix;
+    return $palabraWordix;
 }
 /**************************************/
 /**********FUNCIONES CASE 2************/
@@ -334,7 +334,6 @@ return $coleccionPalabras;
 *@param array $partida
 */
 //Inicialización de variables:
-$nroPartida = 0;
 //Varibles case1
 $coleccionPalabras = [
     "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
@@ -342,7 +341,6 @@ $coleccionPalabras = [
     "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
     "MOUSE", "PASTO", "JEANS", "TUMBA", "PLANO"
 ];
-$palabraAnterior = -10;
 //variables case 2
 
 //variables case 3
@@ -364,21 +362,17 @@ do {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
             $nombreUsuario = solicitarNombre();
-            $palabraWordix = seleccionarPalabra($palabraAnterior, $coleccionPalabras);
-            $palabraAnterior = $palabraWordix;
+            $palabraWordix = seleccionarPalabra($coleccionPalabras, $coleccionPartidas,$nombreUsuario);
             $partida = jugarWordix($coleccionPalabras[$palabraWordix], strtolower($nombreUsuario));
             echo "\n";
-            array_push($coleccionPartidas, $partida);
-            $nroPartida = count($coleccionPartidas) + 1;
-           
+            array_push($coleccionPartidas, $partida); 
             break;
-        case 2: 
+        case 2:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
             $nombreUsuario = solicitarNombre();
             $palabraWordix = numeroAleatorio($coleccionPalabras,$palabraAnterior);
             $partida = jugarWordix($coleccionPalabras[$palabraWordix-1], strtolower($nombreUsuario));
             array_push($coleccionPartidas, $partida);
-            $nroPartida = count($coleccionPartidas) + 1;
             echo"\n";
             break;
         case 3: 

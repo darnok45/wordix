@@ -16,6 +16,22 @@ include_once("wordix.php");
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
+/**
+ * funciones predefinidas de php
+ * empty: comprueba si la variable es vacia. Utilizado en la function solicitarNombreUsuario.
+ * is_numeric: comprueba si un valor es numerico. Utilizado en la function solicitarNombreUsuario.
+ * strtolower: se utiliza para que una cadena de texto este en minuscula. lo utilizamos en el nombre de usuario.
+ * rand: generar un numero entero aleatorio. Utilizado en el case 2.
+ * array_push: se utiliza para agregar uno o mas elementos al final de un array. Utilizado en case 1, 2, 7 y function cargarColeccionPartidas.
+ * var_dump: se utiliza para mostrar información detallada sobre una o mas variables. Utilizado function agregarPalabra.
+ * print_r:  se utiliza para mostrar información sobre una variable. Utilizado en el function partidasOrdenadas.
+ * uosort:  se utiliza para ordenar un array asociativo mediante una función de comparación. Utilizado en el function partidasOrdenadas
+*/
+/**************************************/
+/*******        switch        *********/
+/***funciona de forma similar a una ***/
+/******  serie de sentencias if  ******/
+/**************************************/
 
 /**************************************/
 /********FUNCIONES GENERALES **********/
@@ -200,7 +216,8 @@ do{
     $j++;
 }while(!$bandera3 && $j < count($coleccionPartidas));
 if(!$bandera3){
-    echo "el jugador no existe.";
+    echo "el jugador no existe.","\n";
+    return -1;
 }
 }
 /**************************************/
@@ -215,67 +232,69 @@ if(!$bandera3){
  * @param array partida
  */
 function generarResumenJugador($coleccionPartidas, $nombreDeJugador){
-$nroTotalPartidas = 0; 
-$totalPuntaje = 0; 
-$victorias = 0;
-$porcentajeVictorias = 0;
-$intento1 = 0;
-$intento2 = 0; 
-$intento3 = 0; 
-$intento4 = 0; 
-$intento5 = 0;
-$intento6 = 0;
+    $resumenJugador = [
+        "nroTotalPartidas" => 0,
+        "totalPuntaje" => 0,
+        "victorias" => 0,
+        "porcentajeVictorias" => 0,
+        "intento1" => 0,
+        "intento2" => 0,
+        "intento3" => 0,
+        "intento4" => 0,
+        "intento5" => 0,
+        "intento6" => 0,
+    ];    
     
 foreach ($coleccionPartidas as $partida){
     if ($nombreDeJugador ==  $partida["jugador"]){
-        $nroTotalPartidas++;
-        $totalPuntaje = $totalPuntaje +  $partida["puntaje"];
+        $resumenJugador["nroTotalPartidas"]++;
+        $resumenJugador["totalPuntaje"] = $resumenJugador["totalPuntaje"] +  $partida["puntaje"];
         
          if ( $partida["intentos"] > 0  ) {
-        $victorias++;
+            $resumenJugador["victorias"]++;
          }
     
          if ($partida["intentos"] == 1 ){
-        $intento1++;
+        $resumenJugador["intento1"]++;
          }
     
          if ($partida["intentos"] == 2 ){
-        $intento2++;
+        $resumenJugador["intento2"]++;
          }
     
          if ($partida["intentos"] == 3 ){
-        $intento3++;
+        $resumenJugador["intento3"]++;
          }
     
          if ($partida["intentos"] == 4 ){
-        $intento4++;
+        $resumenJugador["intento4"]++;
          }
     
          if ($partida["intentos"] == 5 ){
-        $intento5++;
+        $resumenJugador["intento5"]++;
          }
     
          if ($partida["intentos"] == 6 ){
-        $intento6++;
+        $resumenJugador["intento2"]++;
         } 
-        if ($nroTotalPartidas > 0) {
-            $porcentajeVictorias = $victorias * 100 / $nroTotalPartidas;
+        if ($resumenJugador["nroTotalPartidas"] > 0) {
+            $resumenJugador["porcentajeVictorias"] = $resumenJugador["victorias"] * 100 / $resumenJugador["nroTotalPartidas"];
         } else {
-            $porcentajeVictorias = 0;
+            $resumenJugador["porcentajeVictorias"] = 0;
         }        
     }   
 }
 echo "═════════════════════════════════════════════════════════════════════════". " \n";
-echo "Número total de partidas: ".$nroTotalPartidas."\n";
-echo "Total de puntajes: ".$totalPuntaje."\n";
-echo "Número de victorias: ".$victorias."\n";
-echo "Porcentaje de victorias: ".$porcentajeVictorias."%"."\n";
-echo "Intentos 1: ".$intento1."\n";
-echo "Intentos 2: ".$intento2."\n";
-echo "Intentos 3: ".$intento3."\n";
-echo "Intentos 4: ".$intento4."\n";
-echo "Intentos 5: ".$intento5."\n";
-echo "Intentos 6: ".$intento6."\n";
+echo "Número total de partidas: ".$resumenJugador["nroTotalPartidas"]."\n";
+echo "Total de puntajes: ".$resumenJugador["totalPuntaje"]."\n";
+echo "Número de victorias: ".$resumenJugador["victorias"]."\n";
+echo "Porcentaje de victorias: ".$resumenJugador["porcentajeVictorias"]."%"."\n";
+echo "Intentos 1: ".$resumenJugador["intento1"]."\n";
+echo "Intentos 2: ".$resumenJugador["intento2"]."\n";
+echo "Intentos 3: ".$resumenJugador["intento3"]."\n";
+echo "Intentos 4: ".$resumenJugador["intento4"]."\n";
+echo "Intentos 5: ".$resumenJugador["intento5"]."\n";
+echo "Intentos 6: ".$resumenJugador["intento6"]."\n";
 echo "═════════════════════════════════════════════════════════════════════════". " \n";
 }     
 /**************************************/
@@ -301,6 +320,14 @@ function comparacion($a, $b){
     return -1;
     }else 
     return 1;
+}
+function partidasOrdenadas($coleccionPartidas){
+    if ($coleccionPartidas == 0){
+        echo "no hay partidas.";
+    }else{
+        uasort($coleccionPartidas,'comparacion');
+        print_r($coleccionPartidas);
+    }
 }
 /**************************************/
 /**********FUNCIONES CASE 7************/
@@ -340,24 +367,15 @@ return $coleccionPalabras;
 *@param array $partida
 */
 //Inicialización de variables:
-//Varibles case1
 $coleccionPalabras = [
     "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
     "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
     "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
     "MOUSE", "PASTO", "JEANS", "TUMBA", "PLANO"
 ];
-//variables case 2
-
-//variables case 3
-
-//variables case 4
-//variables case 5 
 $coleccionPartidas = [];
 $coleccionPartidas= cargarColeccionPartidas();
-//variables case 6
 
-//variables case 7
 
 //Proceso:
 
@@ -398,13 +416,7 @@ do {
             $resumenPartidas = generarResumenJugador ($coleccionPartidas, $nombreDeJugador,);
             break;
         case 6:
-            $partidasOrdenadas = $coleccionPartidas;
-            if ($partidasOrdenadas == 0){
-                echo "no hay partidas.";
-            }else{
-                uasort($partidasOrdenadas,'comparacion');
-                print_r($partidasOrdenadas);
-            }
+            partidasOrdenadas($coleccionPartidas);
             break;
         case 7:
             // Solicitar una palabra de 5 letras al usuario

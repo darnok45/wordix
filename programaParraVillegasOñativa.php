@@ -135,7 +135,7 @@ function seleccionarPalabra($coleccionPalabras, $coleccionPartidas, $nombreUsuar
         $bandera = false;
         for ($i = 0; $i < count($coleccionPartidas); $i++) {
             if ($coleccionPartidas[$i]["jugador"] == $nombreUsuario && $coleccionPartidas[$i]["palabraWordix"] == $coleccionPalabras[$palabraWordix]) {
-            echo "¡La palabra es igual a la anterior! Ingrese otra palabra.\n";
+            echo "¡ya jugo con esa palabra! Ingrese otra palabra.\n";
             $bandera = true;
             }
         }

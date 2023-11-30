@@ -318,9 +318,11 @@ function generarResumenJugador($coleccionPartidas, $nombreDeJugador){
         "intento5" => 0,
         "intento6" => 0,
     ];    
-    
+    $jugadorExiste = false;
+    $noExiste = -1;
 foreach ($coleccionPartidas as $partida){
     if ($nombreDeJugador ==  $partida["jugador"]){
+        $jugadorExiste = true;
         $resumenJugador["nroTotalPartidas"]++;
         $resumenJugador["totalPuntaje"] = $resumenJugador["totalPuntaje"] +  $partida["puntaje"];
         
@@ -349,7 +351,7 @@ foreach ($coleccionPartidas as $partida){
          }
     
          if ($partida["intentos"] == 6 ){
-        $resumenJugador["intento2"]++;
+        $resumenJugador["intento6"]++;
         } 
         if ($resumenJugador["nroTotalPartidas"] > 0) {
             $resumenJugador["porcentajeVictorias"] = $resumenJugador["victorias"] * 100 / $resumenJugador["nroTotalPartidas"];
@@ -358,7 +360,11 @@ foreach ($coleccionPartidas as $partida){
         }        
     }   
 }
-return $resumenJugador;
+if($jugadorExiste){
+    return $resumenJugador;
+}else{
+    return $noExiste;
+}
 }    
 function resumentotal($resumen){
 echo "══════════════════════════════════════════════════════════════════════════════════". " \n";
@@ -491,9 +497,12 @@ do {
             break;
         case 5:
             $nombreDeJugador = solicitarNombre();
-            generarResumenJugador ($coleccionPartidas, $nombreDeJugador,);
             $resumen = generarResumenJugador ($coleccionPartidas, $nombreDeJugador);
+            if ($resumen == -1) {
+                echo"el jugador no existe"."\n";
+            }else{
             resumentotal($resumen);
+            }
             break;
         case 6:
             partidasOrdenadas($coleccionPartidas);

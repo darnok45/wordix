@@ -167,6 +167,9 @@ return $tecladoMenu;
  * @param array $coleccionPartidas
  * @param string $nombreUsuario
  * @return boolean
+$pa1 = ["palabraWordix" => "SUECO", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
+$pa2 = ["palabraWordix" => "YUYOS", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
+$pa3 = ["palabraWordix" => "HUEVO", "jugador" => "zrack", "intentos" => 3, "puntaje" => 9];
  */
 function palabraJugada($palabraTem,$coleccionPartidas,$nombreUsuario){
 /**
@@ -175,11 +178,12 @@ function palabraJugada($palabraTem,$coleccionPartidas,$nombreUsuario){
  */
 $i = 0;
 $palabraJugada = false;
-while ($i < count($coleccionPartidas)){
+while ($i < count($coleccionPartidas) && !$palabraJugada){
         if($coleccionPartidas[$i]["jugador"] == $nombreUsuario && $coleccionPartidas[$i]["palabraWordix"] == $palabraTem) {
-            $palabraJugada = true;           
+            $palabraJugada = true;        
+        } else{
+            $i++;
         }
-        $i++;
     }
     return $palabraJugada;
 }
@@ -292,7 +296,6 @@ $nroPartida = -1;
 do{
    if($coleccionPartidas[$j]["jugador"] == $nombreUsuario){
        if ($coleccionPartidas[$j]["intentos"] > 0) {
-           echo "La primera partida ganadora fue encontrada:\n";
            $bandera3 = true;
            $nroPartida = $j;
         }
@@ -303,9 +306,9 @@ do{
 
 if($nroPartida == -1){
     if($existe){
-        echo "el jugador no gano ninguna partida."."\n";
+        $nroPartida = -1;
     }else{
-        echo "el jugador no existe."."\n";
+        $nroPartida = -2;
     }
 }
 return $nroPartida;
@@ -339,7 +342,6 @@ function generarResumenJugador($coleccionPartidas, $nombreDeJugador){
         "intento6" => 0,
     ];    
     $jugadorExiste = false;
-    $noExiste = -1;
 foreach ($coleccionPartidas as $partida){
     if ($nombreDeJugador ==  $partida["jugador"]){
         $jugadorExiste = true;
@@ -378,7 +380,7 @@ foreach ($coleccionPartidas as $partida){
 if($jugadorExiste){
     return $resumenJugador;
 }else{
-    return $noExiste;
+    return $resumenJugador =[];
 }
 }
 /**
@@ -386,7 +388,7 @@ if($jugadorExiste){
  * @param array $resumen
  */
 function resumentotal($resumen){
-echo "══════════════════════════════════════════════════════════════════════════════════". " \n";
+echo "══════════════════════════════════════════════════════════════════════════════════"."\n";
 echo "Número total de partidas: ".$resumen["nroTotalPartidas"]."\n";
 echo "Total de puntajes: ".$resumen["totalPuntaje"]."\n";
 echo "Número de victorias: ".$resumen["victorias"]."\n";
@@ -514,14 +516,18 @@ do {
             //completar que secuencia de pasos ejecuatar sie le usuario elige la opcion 4
             $nombreUsuario = solicitarNombre();
             $nroPartida = mostrarPartidaGanadora($nombreUsuario,$coleccionPartidas);
-            if ($nroPartida <> -1){
+            if ($nroPartida >= 0){
                 mostrarPartida($coleccionPartidas, $nroPartida+1);
+            }elseif($nroPartida == -1){
+                echo "no gano ninguna partida";
+            }else{
+                echo "el jugador no existe";
             }
             break;
         case 5:
             $nombreDeJugador = solicitarNombre();
             $resumen = generarResumenJugador ($coleccionPartidas, $nombreDeJugador);
-            if ($resumen == -1) {
+            if ($resumen == []) {
                 echo"el jugador no existe"."\n";
             }else{
             resumentotal($resumen);
